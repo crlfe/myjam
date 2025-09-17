@@ -1,0 +1,8 @@
+{
+  "name": "myjam",
+  "version": "0.0.1",
+  "homepage": "https://github.com/crlfe/myjam/",
+  "license": "AGPL-3.0-or-later",
+  "author": "Chris Wolfe (https://crlfe.ca/)",
+  "private": true
+}
