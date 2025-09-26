@@ -1,0 +1,38 @@
+@property --bg {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #fff;
+}
+
+.vert {
+  display: grid;
+  grid: minmax(0, 1fr) / minmax(0, 1fr);
+  gap: 12px;
+}
+
+.bordered {
+  --bg: hsl(20 40 45);
+  background: linear-gradient(var(--bg), var(--bg)) padding-box,
+    linear-gradient(
+        135deg,
+        hsl(from var(--bg) h s calc(l - 5)),
+        hsl(from var(--bg) h s calc(l - 12))
+      )
+      border-box;
+  border: 8px solid transparent;
+  box-shadow: 0 0 0 1px #000;
+  padding: 12px;
+  border-radius: 18px;
+  transform: scale(1);
+  transition: transform 10ms, --bg 10ms;
+}
+
+button.bordered {
+  --bg: hsl(20 42 60);
+  transition: transform 200ms, --bg 200ms;
+}
+
+button.bordered:active {
+  --bg: hsl(20 42 65);
+  transform: scale(0.95);
+}
