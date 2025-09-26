@@ -21,6 +21,11 @@
 
     "checkJs": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "myjam/*": ["./src/*"]
+    }
   }
 }
