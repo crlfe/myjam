@@ -1,3 +1,9 @@
+@property --fg {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #fff;
+}
+
 @property --bg {
   syntax: "<color>";
   inherits: false;
@@ -35,4 +41,12 @@ button.bordered {
 button.bordered:active {
   --bg: hsl(20 42 65);
   transform: scale(0.95);
+}
+
+.particleCircle {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  background: radial-gradient(var(--fg), rgb(from var(--fg) r g b / 0) 70%);
+  opacity: 0;
 }
