@@ -9,10 +9,10 @@ import { opendir } from "node:fs/promises";
 
 const root = dirname(fileURLToPath(import.meta.url));
 
-async function getExamples(): Promise<string[]> {
+async function getEntries(dirname: string): Promise<string[]> {
   const result: string[] = [];
 
-  const dir = await opendir(resolve(root, "examples"), { recursive: true });
+  const dir = await opendir(resolve(root, dirname), { recursive: true });
   for await (const entry of dir) {
     if (entry.isFile() && entry.name.endsWith(".html")) {
       console.log(entry.parentPath, entry.name);
@@ -42,7 +42,11 @@ export default async () =>
     build: {
       modulePreload: false,
       rollupOptions: {
-        input: [resolve(root, "index.html"), ...(await getExamples())],
+        input: [
+          resolve(root, "index.html"),
+          ...(await getEntries("bench")),
+          ...(await getEntries("examples")),
+        ],
         output: {
           assetFileNames: "a/[hash].[ext]",
           chunkFileNames: "a/[hash].js",
