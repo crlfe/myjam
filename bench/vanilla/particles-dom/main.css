@@ -1,0 +1,12 @@
+.particle-layer {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+}
+
+.particle {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(#f00f, #f000 70%);
+  opacity: 0;
+}
