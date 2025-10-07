@@ -21,6 +21,10 @@ const REPLACE_PATTERNS = [
   [/(?<!\d)0(\.\d+)/g, "$1"],
 ] satisfies [RegExp, string][];
 
+/**
+ * Applies simple transformations to shorten GLSL files.
+ * @returns the plugin
+ */
 export default (): Plugin => {
   const filter = createFilter(["**/*.glsl"]);
 

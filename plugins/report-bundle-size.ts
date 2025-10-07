@@ -5,6 +5,10 @@ import { Plugin } from "vite";
 const brotliCompress = NodeUtil.promisify(NodeZlib.brotliCompress);
 const gzip = NodeUtil.promisify(NodeZlib.gzip);
 
+/**
+ * Logs the total size of the written bundle, uncompressed and compressed.
+ * @returns the plugin
+ */
 export default (): Plugin => {
   return {
     name: "report-bundle-size",
@@ -29,10 +33,17 @@ export default (): Plugin => {
       console.log();
     },
   };
-}
+};
 
+/**
+ * Formats a file size to human-readable units.
+ * @param sizeInBytes the size in bytes
+ * @returns the formatted size in B, KiB, or MiB
+ */
 function formatSize(sizeInBytes: number): string {
-  if (sizeInBytes > 5e3) {
+  if (sizeInBytes > 5e6) {
+    return (sizeInBytes / 1e6).toFixed(2) + " MiB";
+  } else if (sizeInBytes > 5e3) {
     return (sizeInBytes / 1e3).toFixed(2) + " KiB";
   } else {
     return sizeInBytes + " B";

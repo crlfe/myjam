@@ -1,12 +1,25 @@
-import { isFunction, isNullish, MaybeArray, Nullish, toArray } from "./util";
+import { isFunction, isNullish, MaybeArray, Nullish, asArray } from "./util";
 
-export type Ref<T extends Element> = (
+type Ref<T extends Element> = (
   target: T,
 ) => MaybeArray<string | Node> | Nullish;
 
-export type Attrs = Record<string, string | Nullish>;
-export type Children<T extends Element> = (string | Node | Ref<T>)[];
+type Attrs = Record<string, string | Nullish>;
+type Children<T extends Element> = (
+  | string
+  | Node
+  | (string | Node)[]
+  | Ref<T>
+)[];
 
+/**
+ * Creates an HTML element with the specified tag name, and sets its initial
+ * attributes and children.
+ * @param name the tag name
+ * @param attrs the attributes
+ * @param children the children
+ * @returns the element
+ */
 export const h: {
   <Name extends keyof HTMLElementTagNameMap>(
     name: Name,
@@ -14,7 +27,7 @@ export const h: {
     Children?: Children<HTMLElementTagNameMap[Name]>,
   ): HTMLElementTagNameMap[Name];
 
-  (name: string, attrs?: Attrs, children?: Children<Element>): HTMLElement;
+  (name: string, attrs?: Attrs, children?: Children<HTMLElement>): HTMLElement;
 } = <T extends HTMLElement>(
   name: string,
   attrs?: Attrs,
@@ -22,22 +35,52 @@ export const h: {
 ): T =>
   prepareElement(document.createElement(name) as unknown as T, attrs, children);
 
+/**
+ * Creates an SVG element with the specified tag name, and sets its initial
+ * attributes and children.
+ * @param name the tag name
+ * @param attrs the attributes
+ * @param children the children
+ * @returns the element
+ */
+export const s: {
+  <Name extends keyof SVGElementTagNameMap>(
+    name: Name,
+    attrs?: Attrs,
+    Children?: Children<SVGElementTagNameMap[Name]>,
+  ): SVGElementTagNameMap[Name];
+
+  (name: string, attrs?: Attrs, children?: Children<SVGElement>): SVGElement;
+} = <T extends SVGElement>(
+  name: string,
+  attrs?: Attrs,
+  children?: Children<T>,
+): T =>
+  prepareElement(document.createElement(name) as unknown as T, attrs, children);
+
+/**
+ * Sets attributes and children on the specified element.
+ * @param element the element
+ * @param attrs the attributes
+ * @param children the children
+ * @returns the element
+ */
 const prepareElement = <T extends Element>(
-  e: T,
+  element: T,
   attrs?: Attrs,
   children?: Children<T>,
 ): T => {
   if (attrs) {
     for (const [name, value] of Object.entries(attrs)) {
       if (!isNullish(value)) {
-        e.setAttribute(name, value);
+        element.setAttribute(name, value);
       }
     }
   }
   if (children) {
     for (const child of children) {
-      e.append(...toArray(isFunction(child) ? child(e) : child));
+      element.append(...asArray(isFunction(child) ? child(element) : child));
     }
   }
-  return e;
+  return element;
 };

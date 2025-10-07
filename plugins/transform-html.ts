@@ -17,6 +17,10 @@ const REPLACE_PATTERNS = [
   [/\s+(?=<)/g, ""],
 ] satisfies [RegExp, string][];
 
+/**
+ * Applies simple transformations to shorten HTML files.
+ * @returns the plugin
+ */
 export default (): Plugin => {
   return {
     name: "transform-html",

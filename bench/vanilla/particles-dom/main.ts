@@ -1,3 +1,5 @@
+import { debugNotNull } from "myjam/util";
+
 const searchParams = new URLSearchParams(document.location.search);
 const params = {
   // Number of particles allocated in the arena.
@@ -12,7 +14,6 @@ const params = {
   // Height of the basic particle, in pixels.
   h: parseInt(searchParams.get("h") || "32", 10),
 } as const;
-
 
 // Create the particle arena. Particle are often triggered in large batches
 // in response to user actions, so we benefit from getting everything
@@ -42,7 +43,9 @@ const ACTIONS = {
       // Use particles in strict round-robin order. This is far simpler than
       // tracking which particles have timed out, and we can divide them into
       // multiple arenas if there are long-lived and short-lived particles.
-      const particle = particles[nextParticle++ % particles.length]!;
+      const particle = debugNotNull(
+        particles[nextParticle++ % particles.length],
+      );
 
       const vel = 100;
       const angle = 2 * Math.PI * Math.random();
@@ -71,7 +74,9 @@ const ACTIONS = {
     const y = layer.clientHeight / 2;
 
     for (let i = 0; i < params.n; i++) {
-      const particle = particles[nextParticle++ % particles.length]!;
+      const particle = debugNotNull(
+        particles[nextParticle++ % particles.length],
+      );
 
       const dx = 200 * Math.random() - 100;
       const dy = 100;

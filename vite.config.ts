@@ -9,13 +9,17 @@ import { opendir } from "node:fs/promises";
 
 const root = dirname(fileURLToPath(import.meta.url));
 
+/**
+ * Gets the absolute paths of all HTML files within the specified directory.
+ * @param dirname the directory
+ * @returns a promise resolving to the list of HTML files
+ */
 async function getEntries(dirname: string): Promise<string[]> {
   const result: string[] = [];
 
   const dir = await opendir(resolve(root, dirname), { recursive: true });
   for await (const entry of dir) {
     if (entry.isFile() && entry.name.endsWith(".html")) {
-      console.log(entry.parentPath, entry.name);
       result.push(resolve(entry.parentPath, entry.name));
     }
   }

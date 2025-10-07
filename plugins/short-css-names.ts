@@ -1,5 +1,9 @@
 import { Plugin } from "vite";
 
+/**
+ * Replaces the default CSS module names with shorter strings.
+ * @returns the plugin
+ */
 export default (): Plugin => {
   const cache = new Map<string, string>();
   return {
@@ -24,6 +28,12 @@ export default (): Plugin => {
   };
 };
 
+/**
+ * Makes a short name consisting of "c" followed by the BASE62 encoding of the
+ * index number.
+ * @param index the index number
+ * @returns the short name
+ */
 function makeShortName(index: number): string {
   const BASE62 =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" + "0123456789";
