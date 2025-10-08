@@ -135,7 +135,7 @@ document.body.append(
       h(
         "a",
         {
-          href: "https://github.com/crlfe/myjam/blob/main/examples/particles-dom/main.ts",
+          href: "https://github.com/crlfe/myjam/blob/main/examples/particles-dom/src/main.ts",
         },
         ["View Source"],
       ),
