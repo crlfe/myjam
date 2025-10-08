@@ -1,32 +1,16 @@
-import { Plugin } from "vite";
+export class ShortCssNames {
+  readonly #cache = new Map<string, string>();
 
-/**
- * Replaces the default CSS module names with shorter strings.
- * @returns the plugin
- */
-export default (): Plugin => {
-  const cache = new Map<string, string>();
-  return {
-    name: "short-css-names",
-    config() {
-      return {
-        css: {
-          modules: {
-            generateScopedName(name, filename) {
-              const key = `${filename}#${name}`;
-              let value = cache.get(key);
-              if (!value) {
-                value = makeShortName(cache.size);
-                cache.set(key, value);
-              }
-              return value;
-            },
-          },
-        },
-      };
-    },
-  };
-};
+  get(name: string, filename: string): string {
+    const key = `${filename}#${name}`;
+    let value = this.#cache.get(key);
+    if (!value) {
+      value = makeShortName(this.#cache.size);
+      this.#cache.set(key, value);
+    }
+    return value;
+  }
+}
 
 /**
  * Makes a short name consisting of "c" followed by the BASE62 encoding of the

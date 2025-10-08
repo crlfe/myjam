@@ -1,10 +1,7 @@
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
-import reportBundleSize from "./plugins/report-bundle-size";
-import shortCssNames from "./plugins/short-css-names";
-import transformHtml from "./plugins/transform-html";
-import transformShaders from "./plugins/transform-shaders";
+import myjam from "./plugins/index";
 import { opendir } from "node:fs/promises";
 
 const root = dirname(fileURLToPath(import.meta.url));
@@ -30,12 +27,7 @@ async function getEntries(dirname: string): Promise<string[]> {
 
 export default async () =>
   defineConfig({
-    plugins: [
-      reportBundleSize(),
-      shortCssNames(),
-      transformHtml(),
-      transformShaders(),
-    ],
+    plugins: [myjam()],
     appType: "mpa",
     base: "",
     resolve: {

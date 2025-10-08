@@ -1,39 +1,36 @@
 import * as NodeUtil from "node:util";
 import * as NodeZlib from "node:zlib";
-import { Plugin } from "vite";
+import { type Rollup } from "vite";
 
 const brotliCompress = NodeUtil.promisify(NodeZlib.brotliCompress);
 const gzip = NodeUtil.promisify(NodeZlib.gzip);
 
 /**
- * Logs the total size of the written bundle, uncompressed and compressed.
- * @returns the plugin
+ * Reports the total size of the generated bundle, uncompressed and compressed.
+ * @param bundle the bundle
+ * @returns the report
  */
-export default (): Plugin => {
-  return {
-    name: "report-bundle-size",
-    async writeBundle(_options, bundle) {
-      let totalSize = 0;
-      let gzipSize = 0;
-      let brSize = 0;
-      for (const item of Object.values(bundle)) {
-        const data = Buffer.from(
-          item.type === "chunk" ? item.code : item.source,
-        );
+export async function reportBundleSize(
+  bundle: Rollup.OutputBundle,
+): Promise<string> {
+  let totalSize = 0;
+  let gzipSize = 0;
+  let brSize = 0;
+  for (const item of Object.values(bundle)) {
+    const data = Buffer.from(item.type === "chunk" ? item.code : item.source);
 
-        totalSize += data.length;
-        gzipSize += (await gzip(data, { level: 9 })).length;
-        brSize += (await brotliCompress(data)).length;
-      }
-      console.log(
-        `Total ${formatSize(totalSize)}`,
-        `| gzip: ${formatSize(gzipSize)}`,
-        `| br: ${formatSize(brSize)}`,
-      );
-      console.log();
-    },
-  };
-};
+    totalSize += data.length;
+    gzipSize += (await gzip(data, { level: 9 })).length;
+    brSize += (await brotliCompress(data)).length;
+  }
+  return (
+    [
+      `Total ${formatSize(totalSize)}`,
+      `gzip: ${formatSize(gzipSize)}`,
+      `br: ${formatSize(brSize)}`,
+    ].join(" | ") + "\n"
+  );
+}
 
 /**
  * Formats a file size to human-readable units.
