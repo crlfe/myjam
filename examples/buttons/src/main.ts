@@ -8,7 +8,7 @@ document.body.append(
       h(
         "a",
         {
-          href: "https://github.com/crlfe/myjam/blob/main/examples/buttons/main.ts",
+          href: "https://github.com/crlfe/myjam/blob/main/examples/buttons/src/main.ts",
         },
         ["View Source"],
       ),
