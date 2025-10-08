@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "name": "vite-plugin-myjam",
+  "type": "module",
+  "types": "./src/index.ts",
+  "module": "./dist/index.js",
+  "main": "./dist/index.cjs",
+  "scripts": {
+    "build": "vite build",
+    "watch": "vite build --watch"
+  },
+  "dependencies": {
+    "terser": "^5.44.0"
+  },
+  "peerDependencies": {
+    "vite": "^7.1.9"
+  },
+  "devDependencies": {
+    "@types/node": "^24.7.0"
+  },
+  "packageManager": "pnpm@10.16.0"
+}

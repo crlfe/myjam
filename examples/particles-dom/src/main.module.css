@@ -1,0 +1,30 @@
+@property --fg {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #fff;
+}
+
+.app {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: center;
+}
+
+.app > * {
+  grid-area: 1 / 1;
+  position: relative;
+}
+
+.vert {
+  display: grid;
+  grid: minmax(0, 1fr) / minmax(0, 1fr);
+  gap: 12px;
+}
+
+.particleCircle {
+  position: absolute;
+  background: radial-gradient(var(--fg), rgb(from var(--fg) r g b / 0) 70%);
+  opacity: 0;
+}

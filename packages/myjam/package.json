@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "myjam",
+  "type": "module",
+  "types": "./src/index.ts",
+  "module": "./dist/index.js",
+  "main": "./dist/index.cjs",
+  "scripts": {
+    "build": "vite build",
+    "watch": "vite build --watch"
+  },
+  "devDependencies": {
+    "vite": "^7.1.9"
+  },
+  "packageManager": "pnpm@10.16.0"
+}
