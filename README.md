@@ -12,7 +12,7 @@ I'm currently working on adding...
 
 And scheming for a future with...
 
-* Refactor into a MyJam library and vite plugin, with multiple examples.
+* More examples! Of actually using the library! And documentation!
 * WebAudio sound effect synthesis inspired by SFXR and clones.
 * WebGL2 wrapper for tile-based 2.5D side-scrolling and isometric games.
 * Migrate to WebGPU once it reaches baseline availability.

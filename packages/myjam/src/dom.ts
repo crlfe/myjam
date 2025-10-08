@@ -1,16 +1,16 @@
-import { isFunction, isNullish, MaybeArray, Nullish, asArray } from "./util";
-
-type Ref<T extends Element> = (
-  target: T,
-) => MaybeArray<string | Node> | Nullish;
+import { isFunction, isNullish, MaybeArray, Nullish, asArray } from "./util.ts";
 
 type Attrs = Record<string, string | Nullish>;
+
 type Children<T extends Element> = (
-  | string
-  | Node
-  | (string | Node)[]
-  | Ref<T>
+  | MaybeArray<string | Node>
+  | Nullish
+  | Hook<T>
 )[];
+
+type Hook<T extends Element> = (
+  target: T,
+) => MaybeArray<string | Node> | Nullish;
 
 /**
  * Creates an HTML element with the specified tag name, and sets its initial
