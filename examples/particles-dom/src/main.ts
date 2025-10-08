@@ -132,6 +132,13 @@ const ACTIONS = {
 document.body.append(
   h("div", { class: css["app"] }, [
     h("div", { class: css["vert"] }, [
+      h(
+        "a",
+        {
+          href: "https://github.com/crlfe/myjam/blob/main/examples/particles-dom/main.ts",
+        },
+        ["View Source"],
+      ),
       h("p", { style: "max-width:30rem" }, [
         "This generates random particles using pre-created DIV elements, ",
         "which translate/scale and change color through the animation. ",

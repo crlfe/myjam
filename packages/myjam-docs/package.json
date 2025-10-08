@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "examples-buttons": "workspace:../../examples/buttons",
+    "examples-particles-dom": "workspace:../../examples/particles-dom",
+    "vite": "^7.1.9",
+    "vite-plugin-myjam": "workspace:"
+  },
+  "packageManager": "pnpm@10.16.0"
+}
