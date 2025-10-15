@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "tsdown",
-    "watch": "tsdown --watch"
+    "watch": "tsdown --no-clean --watch"
   },
   "packageManager": "pnpm@10.16.0",
   "minimumReleaseAge": 10080,

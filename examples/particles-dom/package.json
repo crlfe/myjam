@@ -7,15 +7,16 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite dev",
+    "preview": "vite preview",
     "watch": "vite build --watch"
   },
   "packageManager": "pnpm@10.16.0",
   "minimumReleaseAge": 10080,
   "dependencies": {
-    "myjam": "workspace:"
+    "myjam": "workspace:*"
   },
   "devDependencies": {
     "vite": "^7.1.9",
-    "vite-plugin-myjam": "workspace:"
+    "vite-plugin-myjam": "workspace:*"
   }
 }
