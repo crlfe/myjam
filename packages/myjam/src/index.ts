@@ -1,2 +1,2 @@
-export * from "./dom.ts";
-export * from "./util.ts";
+export * from "./dom";
+export * from "./util";

@@ -1,22 +1,27 @@
 {
   "private": true,
   "name": "vite-plugin-myjam",
+  "license": "AGPL-3.0-or-later",
+  "author": "Chris Wolfe (https://crlfe.ca/)",
   "type": "module",
-  "types": "./src/index.ts",
-  "module": "./dist/index.js",
-  "main": "./dist/index.cjs",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
-    "build": "vite build",
-    "watch": "vite build --watch"
+    "build": "tsdown",
+    "watch": "tsdown --watch"
   },
-  "dependencies": {
-    "terser": "^5.44.0"
-  },
+  "packageManager": "pnpm@10.16.0",
+  "minimumReleaseAge": 10080,
   "peerDependencies": {
-    "vite": "^7.1.9"
+    "terser": "^5.44.0",
+    "vite": "^7.1.10"
   },
   "devDependencies": {
-    "@types/node": "^24.7.0"
-  },
-  "packageManager": "pnpm@10.16.0"
+    "@types/node": "^24.7.0",
+    "tsdown": "^0.15.7"
+  }
 }

@@ -2,13 +2,15 @@
   "private": true,
   "license": "AGPL-3.0-or-later",
   "author": "Chris Wolfe (https://crlfe.ca/)",
-  "minimumReleaseAge": 10080,
+  "type": "module",
   "scripts": {
     "build": "pnpm -r --sequential run build",
     "build-packages": "pnpm -r --filter './packages/**' --sequential run build",
     "watch-packages": "pnpm -r --filter './packages/**' --parallel run watch",
     "lint": "eslint ."
   },
+  "packageManager": "pnpm@10.16.0",
+  "minimumReleaseAge": 10080,
   "devDependencies": {
     "@eslint/js": "^9.37.0",
     "@tsconfig/strictest": "^2.0.6",
@@ -16,6 +18,5 @@
     "eslint-plugin-jsdoc": "^60.8.3",
     "prettier": "^3.6.2",
     "typescript-eslint": "^8.46.0"
-  },
-  "packageManager": "pnpm@10.16.0"
+  }
 }

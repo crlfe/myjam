@@ -2,15 +2,29 @@
   "private": true,
   "name": "myjam",
   "type": "module",
-  "types": "./src/index.ts",
-  "module": "./dist/index.js",
-  "main": "./dist/index.cjs",
+  "license": "AGPL-3.0-or-later",
+  "author": "Chris Wolfe (https://crlfe.ca/)",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./dom": {
+      "types": "./dist/dom.d.ts",
+      "import": "./dist/dom.js"
+    },
+    "./util": {
+      "types": "./dist/util.d.ts",
+      "import": "./dist/util.js"
+    }
+  },
   "scripts": {
-    "build": "vite build",
-    "watch": "vite build --watch"
+    "build": "tsdown",
+    "watch": "tsdown --watch"
   },
+  "packageManager": "pnpm@10.16.0",
+  "minimumReleaseAge": 10080,
   "devDependencies": {
-    "vite": "^7.1.9"
-  },
-  "packageManager": "pnpm@10.16.0"
+    "tsdown": "^0.15.7"
+  }
 }

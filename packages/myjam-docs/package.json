@@ -1,16 +1,20 @@
 {
   "private": true,
   "type": "module",
+  "license": "AGPL-3.0-or-later",
+  "author": "Chris Wolfe (https://crlfe.ca/)",
   "scripts": {
-    "dev": "vite dev",
     "build": "vite build",
-    "preview": "vite preview"
+    "dev": "vite dev",
+    "preview": "vite preview",
+    "watch": "vite build --watch"
   },
+  "packageManager": "pnpm@10.16.0",
+  "minimumReleaseAge": 10080,
   "devDependencies": {
-    "examples-buttons": "workspace:../../examples/buttons",
-    "examples-particles-dom": "workspace:../../examples/particles-dom",
+    "examples-buttons": "workspace:",
+    "examples-particles-dom": "workspace:",
     "vite": "^7.1.9",
     "vite-plugin-myjam": "workspace:"
-  },
-  "packageManager": "pnpm@10.16.0"
+  }
 }
