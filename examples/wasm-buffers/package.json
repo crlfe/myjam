@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "myjam-docs",
+  "name": "examples-wasm-buffers",
   "license": "AGPL-3.0-or-later",
   "author": "Chris Wolfe (https://crlfe.ca/)",
   "type": "module",
@@ -12,10 +12,10 @@
   },
   "packageManager": "pnpm@10.16.0",
   "minimumReleaseAge": 10080,
+  "dependencies": {
+    "myjam": "workspace:*"
+  },
   "devDependencies": {
-    "examples-buttons": "workspace:*",
-    "examples-particles-dom": "workspace:*",
-    "examples-wasm-buffers": "workspace:*",
     "vite": "^7.1.9",
     "vite-plugin-myjam": "workspace:*"
   }

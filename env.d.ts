@@ -9,3 +9,9 @@ declare module "*.glsl" {
   const content: string;
   export default content;
 }
+
+declare module "*.wat" {
+  export default async function (
+    imports?: Record<string, unknown>,
+  ): Promise<WebAssembly.Instance>;
+}

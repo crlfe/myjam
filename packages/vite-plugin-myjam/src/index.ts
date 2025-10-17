@@ -3,6 +3,7 @@ import { minifyHtml } from "./minify-html";
 import { minifyShader } from "./minify-shader";
 import { reportBundleSize } from "./report-bundle-size";
 import { ShortCssNames } from "./short-css-names";
+import { loadWebAssemblyText } from "./webassembly";
 
 /**
  * Vite plugin to minimize myjam-based apps and report output sizes.
@@ -11,6 +12,7 @@ import { ShortCssNames } from "./short-css-names";
 export default function myjam(): Plugin {
   const names = new ShortCssNames();
   const shaderFilter = createFilter("**/*.glsl");
+  const webassemblyTextFilter = createFilter("**/*.wat");
 
   // TODO: Consider turning off most/all of the optimizations in dev mode.
   // TODO: Look for a clean way to have vite's watcher pick up changes in linked dependencies.
@@ -50,6 +52,9 @@ export default function myjam(): Plugin {
           format: "esm",
           loader: "text",
         });
+      }
+      if (webassemblyTextFilter(id)) {
+        return loadWebAssemblyText(code, id);
       }
       return null;
     },
