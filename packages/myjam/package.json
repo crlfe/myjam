@@ -25,6 +25,6 @@
   "packageManager": "pnpm@10.16.0",
   "minimumReleaseAge": 10080,
   "devDependencies": {
-    "tsdown": "^0.15.7"
+    "tsdown": "^0.15.9"
   }
 }

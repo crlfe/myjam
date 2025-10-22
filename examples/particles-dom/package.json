@@ -16,7 +16,7 @@
     "myjam": "workspace:*"
   },
   "devDependencies": {
-    "vite": "^7.1.9",
+    "vite": "^7.1.11",
     "vite-plugin-myjam": "workspace:*"
   }
 }

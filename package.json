@@ -12,11 +12,11 @@
   "packageManager": "pnpm@10.16.0",
   "minimumReleaseAge": 10080,
   "devDependencies": {
-    "@eslint/js": "^9.37.0",
+    "@eslint/js": "^9.38.0",
     "@tsconfig/strictest": "^2.0.6",
-    "eslint": "^9.37.0",
+    "eslint": "^9.38.0",
     "eslint-plugin-jsdoc": "^60.8.3",
     "prettier": "^3.6.2",
-    "typescript-eslint": "^8.46.0"
+    "typescript-eslint": "^8.46.2"
   }
 }
