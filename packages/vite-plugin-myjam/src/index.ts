@@ -54,7 +54,7 @@ export default function myjam(): Plugin {
         });
       }
       if (webassemblyTextFilter(id)) {
-        return loadWebAssemblyText(code, id);
+        return loadWebAssemblyText(code);
       }
       return null;
     },
