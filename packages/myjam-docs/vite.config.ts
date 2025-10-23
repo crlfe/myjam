@@ -1,12 +1,7 @@
-import { type Plugin, defineConfig } from "vite";
-import myjam from "vite-plugin-myjam";
 import { opendir, readFile } from "node:fs/promises";
 import NodePath from "node:path";
-
-export default defineConfig({
-  plugins: [myjam(), copyExamples()],
-  appType: "mpa",
-});
+import { defineConfig, type Plugin } from "vite";
+import myjam from "vite-plugin-myjam";
 
 /**
  * Copy examples from node_modules into dist/examples.
@@ -16,13 +11,14 @@ function copyExamples(): Plugin {
   return {
     name: "copy-examples",
     async generateBundle() {
-      // TODO: Look for a better way to collect the compiled examples.
-      // Hopefully one that automatically supports `vite dev`, so we can avoid
-      // writing a server middleware.
-      //
-      // TODO: pnpm recursive says that it will respect project depdencies, but
-      // without the --sequential argument this actually gets run before the
-      // examples finish building. Not sure whether that's their bug or ours.
+      /* TODO: Look for a better way to collect the compiled examples.
+       * Hopefully one that automatically supports `vite dev`, so we can avoid
+       * writing a server middleware.
+       */
+      /* TODO: pnpm recursive says that it will respect project depdencies, but
+       * without the --sequential argument this actually gets run before the
+       * examples finish building. Not sure whether that's their bug or ours.
+       */
       const modules = await opendir("node_modules");
       for await (const module of modules) {
         if (module.name.startsWith("examples-")) {
@@ -46,3 +42,8 @@ function copyExamples(): Plugin {
     },
   };
 }
+
+export default defineConfig({
+  plugins: [myjam(), copyExamples()],
+  appType: "mpa",
+});

@@ -1,4 +1,4 @@
-import { h, debugNotNull } from "myjam";
+import { debugNotNull, h } from "myjam";
 import summer from "./summer.wat";
 
 const status = h("div", {}, ["Loading..."]);
@@ -35,7 +35,7 @@ const main = async () => {
   const in1 = new Uint16Array(memory.buffer, in1Addr, bufferLen);
   const out = new Uint16Array(memory.buffer, outAddr, bufferLen);
 
-  for (let i = 0; i < bufferLen; i++) {
+  for (let i = 0; i < bufferLen; i += 1) {
     in0[i] = Math.floor(Math.random() * 65536);
     in1[i] = Math.floor(Math.random() * 65536);
     out[i] = 0;
@@ -52,11 +52,11 @@ const main = async () => {
   status.textContent = "Checking...";
 
   let errors = 0;
-  for (let i = 0; i < bufferLen; i++) {
+  for (let i = 0; i < bufferLen; i += 1) {
     const expect = Math.min(65535, debugNotNull(in0[i]) + debugNotNull(in1[i]));
-    if (out[i] != expect) {
+    if (out[i] !== expect) {
       console.log(out[i], in0[i], in1[i]);
-      errors++;
+      errors += 1;
     }
   }
 

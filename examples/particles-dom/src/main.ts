@@ -1,5 +1,4 @@
-import { h, debugNotNull } from "myjam";
-
+import { debugNotNull, h } from "myjam";
 import css from "./main.module.css";
 
 const searchParams = new URLSearchParams(document.location.search);
@@ -26,10 +25,10 @@ const particles = Array.from({ length: params.p }, () =>
 
 let nextParticleIndex = 0;
 const nextParticle = (): HTMLDivElement => {
-  // Use particles in strict round-robin order. This is far simpler than
-  // tracking which particles have timed out, and we can later divide them into
-  // multiple arenas if there are e.g. long-lived and short-lived particles.
-
+  /* Use particles in strict round-robin order. This is far simpler than
+   * tracking which particles have timed out, and we can later divide them into
+   * multiple arenas if there are e.g. long-lived and short-lived particles.
+   */
   const result = debugNotNull(particles[nextParticleIndex]);
   nextParticleIndex = (nextParticleIndex + 1) % particles.length;
   return result;
@@ -37,7 +36,7 @@ const nextParticle = (): HTMLDivElement => {
 
 const ACTIONS = {
   Explode(x: number, y: number): void {
-    for (let i = 0; i < params.n; i++) {
+    for (let i = 0; i < params.n; i += 1) {
       const particle = nextParticle();
 
       const th = 2 * Math.PI * Math.random();
@@ -48,8 +47,9 @@ const ACTIONS = {
       const x2 = x + 1.25 * vel * Math.cos(th);
       const y2 = y + 1.25 * vel * Math.sin(th);
 
-      // Using the animation API should let the browser offload work to the GPU.
-      // At very least, it avoids running our JS code for every frame.
+      /* Using the animation API should let the browser offload work to the GPU.
+       * At very least, it avoids running our JS code for every frame.
+       */
       particle.animate(
         [
           {
@@ -73,7 +73,7 @@ const ACTIONS = {
     }
   },
   Circle(x: number, y: number): void {
-    for (let i = 0; i < params.n; i++) {
+    for (let i = 0; i < params.n; i += 1) {
       const particle = nextParticle();
 
       const vel = 200;
@@ -98,7 +98,7 @@ const ACTIONS = {
     }
   },
   Spray(x: number, y: number): void {
-    for (let i = 0; i < params.n; i++) {
+    for (let i = 0; i < params.n; i += 1) {
       const particle = nextParticle();
 
       const dx = 200 * Math.random() - 100;

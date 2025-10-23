@@ -1,6 +1,5 @@
-import { Rollup } from "vite";
-
 import binaryen from "binaryen";
+import type { Rollup } from "vite";
 
 /**
  * Loads a WebAssembly text file.
@@ -24,7 +23,7 @@ export async function loadWebAssemblyText(
 
   // TODO: Should use this.emitFile in production mode to avoid base64 overhead.
   const data = JSON.stringify(
-    `data:application/wasm;base64,` + Buffer.from(buffer).toString("base64"),
+    `data:application/wasm;base64,${Buffer.from(buffer).toString("base64")}`,
   );
 
   return {

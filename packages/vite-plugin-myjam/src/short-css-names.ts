@@ -1,17 +1,3 @@
-export class ShortCssNames {
-  readonly #cache = new Map<string, string>();
-
-  get(name: string, filename: string): string {
-    const key = `${filename}#${name}`;
-    let value = this.#cache.get(key);
-    if (!value) {
-      value = makeShortName(this.#cache.size);
-      this.#cache.set(key, value);
-    }
-    return value;
-  }
-}
-
 /**
  * Makes a short name consisting of "c" followed by the BASE62 encoding of the
  * index number.
@@ -27,4 +13,18 @@ function makeShortName(index: number): string {
     index = Math.floor(index / 62);
   } while (index > 0);
   return name;
+}
+
+export class ShortCssNames {
+  readonly #cache = new Map<string, string>();
+
+  get(name: string, filename: string): string {
+    const key = `${filename}#${name}`;
+    let value = this.#cache.get(key);
+    if (!value) {
+      value = makeShortName(this.#cache.size);
+      this.#cache.set(key, value);
+    }
+    return value;
+  }
 }

@@ -1,10 +1,9 @@
 import { h } from "myjam";
-
 import css from "./main.module.css";
 
 document.body.append(
   h("div", { class: css["app"] }, [
-    h("div", { class: css["bordered"] + " " + css["vert"] }, [
+    h("div", { class: `${css["bordered"]} ${css["vert"]}` }, [
       h(
         "a",
         {

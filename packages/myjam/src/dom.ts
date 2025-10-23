@@ -1,4 +1,4 @@
-import { isFunction, isNullish, MaybeArray, Nullish, asArray } from "./util.ts";
+import { asArray, isFunction, isNullish, MaybeArray, Nullish } from "./util.ts";
 
 type Attrs = Record<string, string | Nullish>;
 
@@ -11,6 +11,36 @@ type Children<T extends Element> = (
 type Hook<T extends Element> = (
   target: T,
 ) => MaybeArray<string | Node> | Nullish;
+
+/**
+ * Sets attributes and children on the specified element.
+ * @param element the element
+ * @param attrs the attributes
+ * @param children the children
+ * @returns the element
+ */
+const prepareElement = <T extends Element>(
+  element: T,
+  attrs?: Attrs,
+  children?: Children<T>,
+): T => {
+  if (attrs) {
+    for (const [name, value] of Object.entries(attrs)) {
+      if (!isNullish(value)) {
+        element.setAttribute(name, value);
+      }
+    }
+  }
+  if (children) {
+    for (let child of children) {
+      if (isFunction(child)) {
+        child = child(element);
+      }
+      element.append(...asArray(child));
+    }
+  }
+  return element;
+};
 
 /**
  * Creates an HTML element with the specified tag name, and sets its initial
@@ -57,30 +87,3 @@ export const s: {
   children?: Children<T>,
 ): T =>
   prepareElement(document.createElement(name) as unknown as T, attrs, children);
-
-/**
- * Sets attributes and children on the specified element.
- * @param element the element
- * @param attrs the attributes
- * @param children the children
- * @returns the element
- */
-const prepareElement = <T extends Element>(
-  element: T,
-  attrs?: Attrs,
-  children?: Children<T>,
-): T => {
-  if (attrs) {
-    for (const [name, value] of Object.entries(attrs)) {
-      if (!isNullish(value)) {
-        element.setAttribute(name, value);
-      }
-    }
-  }
-  if (children) {
-    for (const child of children) {
-      element.append(...asArray(isFunction(child) ? child(element) : child));
-    }
-  }
-  return element;
-};

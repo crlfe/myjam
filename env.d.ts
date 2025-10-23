@@ -11,7 +11,7 @@ declare module "*.glsl" {
 }
 
 declare module "*.wat" {
-  export default async function (
-    imports?: Record<string, unknown>,
+  export default function (
+    imports: Record<string, unknown>,
   ): Promise<WebAssembly.Instance>;
 }

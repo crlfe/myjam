@@ -25,7 +25,8 @@ const REPLACE_PATTERNS = [
  * @returns the minified shader code
  */
 export function minifyShader(code: string): string {
-  // TODO: This should really be replaced with enough of a parser to avoid
-  // edge cases from regexp mismatches and add variable/parameter renaming.
+  /* TODO: This should really be replaced with enough of a parser to avoid
+   * edge cases from regexp mismatches and add variable/parameter renaming.
+   */
   return REPLACE_PATTERNS.reduce((s, [p, r]) => s.replaceAll(p, r), code);
 }

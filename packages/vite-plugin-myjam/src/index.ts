@@ -1,4 +1,4 @@
-import { type Plugin, createFilter, transformWithEsbuild } from "vite";
+import { createFilter, transformWithEsbuild, type Plugin } from "vite";
 import { minifyHtml } from "./minify-html";
 import { minifyShader } from "./minify-shader";
 import { reportBundleSize } from "./report-bundle-size";

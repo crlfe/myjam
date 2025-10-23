@@ -20,20 +20,13 @@ type VoidIgnoreLint = void;
  * @returns the clamped value
  */
 export const clamp = (value: number, min: number, max: number): number => {
-  return value < min ? min : value > max ? max : value;
-};
-
-/**
- * Asserts that a value is not nullish.
- * Only in development mode, this assertion will throw if violated.
- * @param value the value
- * @returns the non-nullish value
- */
-export const debugNotNull = <T>(value: T | Nullish): T => {
-  if (import.meta.env.DEV && isNullish(value)) {
-    throw new TypeError(`${value} is nullish`);
+  if (value < min) {
+    return min;
+  } else if (value > max) {
+    return max;
+  } else {
+    return value;
   }
-  return value as T;
 };
 
 /**
@@ -66,6 +59,7 @@ type FunctionIgnoreLint = Function;
  * @returns whether the value is nullish
  */
 export const isNullish = (value: unknown): value is Nullish => {
+  // eslint-disable-next-line eqeqeq
   return value == null;
 };
 
@@ -84,4 +78,17 @@ export const asArray = <T>(value: MaybeArray<T> | Nullish): T[] => {
   } else {
     return [value];
   }
+};
+
+/**
+ * Asserts that a value is not nullish.
+ * Only in development mode, this assertion will throw if violated.
+ * @param value the value
+ * @returns the non-nullish value
+ */
+export const debugNotNull = <T>(value: T | Nullish): T => {
+  if (import.meta.env.DEV && isNullish(value)) {
+    throw new TypeError(`${value} is nullish`);
+  }
+  return value as T;
 };
