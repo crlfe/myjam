@@ -7,7 +7,7 @@
     "build": "pnpm -r run build",
     "build-packages": "pnpm -r --filter './packages/**' run build",
     "watch-packages": "pnpm -r --filter './packages/**' --parallel run watch",
-    "lint": "eslint ."
+    "lint": "eslint . && tsc --noEmit"
   },
   "packageManager": "pnpm@10.16.0",
   "minimumReleaseAge": 10080,
@@ -19,6 +19,7 @@
     "eslint-plugin-jsdoc": "^60.8.3",
     "eslint-plugin-prettier": "^5.5.4",
     "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.2"
   },
   "dependencies": {

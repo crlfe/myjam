@@ -1,4 +1,4 @@
-import { asArray, isFunction, isNullish, MaybeArray, Nullish } from "./util.ts";
+import { asArray, isFunction, isNullish, MaybeArray, Nullish } from "./util";
 
 type Attrs = Record<string, string | Nullish>;
 

@@ -4,7 +4,7 @@
     "noEmit": true,
     "target": "esnext",
     "module": "esnext",
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true
-  }
+    "moduleResolution": "bundler"
+  },
+  "exclude": ["**/dist"]
 }
