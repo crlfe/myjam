@@ -12,7 +12,10 @@
   "packageManager": "pnpm@10.16.0",
   "minimumReleaseAge": 10080,
   "devDependencies": {
+    "@eslint/core": "^0.17.0",
+    "@eslint/css": "^0.14.0",
     "@eslint/js": "^9.38.0",
+    "@html-eslint/eslint-plugin": "^0.47.0",
     "@tsconfig/strictest": "^2.0.6",
     "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",

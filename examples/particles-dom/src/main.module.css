@@ -24,6 +24,7 @@
 }
 
 .particleCircle {
+  --fg: #fff;
   position: absolute;
   background: radial-gradient(var(--fg), rgb(from var(--fg) r g b / 0) 70%);
   opacity: 0;
