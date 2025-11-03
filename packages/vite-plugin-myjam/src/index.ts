@@ -44,6 +44,12 @@ export default function myjam(): Plugin {
             },
           },
         },
+        server: {
+          headers: {
+            "Cross-Origin-Embedder-Policy": "require-corp",
+            "Cross-Origin-Opener-Policy": "same-origin",
+          },
+        },
       };
     },
     async transform(code, id) {

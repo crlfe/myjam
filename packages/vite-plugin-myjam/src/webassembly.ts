@@ -28,8 +28,8 @@ export async function loadWebAssemblyText(
 
   return {
     code: [
-      `const module = await WebAssembly.compileStreaming(fetch(${data}), {});`,
-      `export default (imports) => WebAssembly.instantiate(module, imports);`,
+      `const streaming = WebAssembly.compileStreaming(fetch(${data}), {});`,
+      `export default (imports) => streaming.then(module => WebAssembly.instantiate(module, imports));`,
     ].join("\n"),
   };
 }
