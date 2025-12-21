@@ -3,11 +3,12 @@ import eslint from "@eslint/js";
 import html from "@html-eslint/eslint-plugin";
 import jsdoc from "eslint-plugin-jsdoc";
 import prettier from "eslint-plugin-prettier/recommended";
-import { defineConfig, globalIgnores } from "eslint/config";
+import { defineConfig, globalIgnores, type Config } from "eslint/config";
 import tseslint from "typescript-eslint";
 
-/** @type {Parameters<defineConfig>[0]} */
-const scriptCommon = {
+export { defineConfig };
+
+const scriptCommon: Config = {
   rules: {
     "capitalized-comments": ["error"],
     eqeqeq: ["error"],
@@ -18,7 +19,7 @@ const scriptCommon = {
   },
 };
 
-export default defineConfig(
+export const config = defineConfig(
   {
     files: ["**/*.{c,m,}js{x,}"],
     extends: [
@@ -69,3 +70,5 @@ export default defineConfig(
   prettier,
   globalIgnores(["**/dist"]),
 );
+
+export default config;

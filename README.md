@@ -7,15 +7,15 @@ build fun small-scale games that feel more polished than usual game jam fodder.
 
 I'm currently working on adding...
 
-* Fun, bouncy, themeable HTML+CSS components for 2D user interface.
-* WebGL2 particle system, initially for effects on the 2D user interface.
+- Fun, bouncy, themeable HTML+CSS components for 2D user interface.
+- WebGL2 particle system, initially for effects on the 2D user interface.
 
 And scheming for a future with...
 
-* More examples! Of actually using the library! And documentation!
-* WebAudio sound effect synthesis inspired by SFXR and clones.
-* WebGL2 wrapper for tile-based 2.5D side-scrolling and isometric games.
-* Migrate to WebGPU once it reaches baseline availability.
+- More examples! Of actually using the library! And documentation!
+- WebAudio sound effect synthesis inspired by SFXR and clones.
+- WebGL2 wrapper for tile-based 2.5D side-scrolling and isometric games.
+- Migrate to WebGPU once it reaches baseline availability.
 
 # License and Warranty Disclaimer
 

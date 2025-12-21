@@ -1,0 +1,3 @@
+{
+  "extends": "myjam-config/tsconfig"
+}

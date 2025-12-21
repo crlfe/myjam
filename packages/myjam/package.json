@@ -25,6 +25,7 @@
   "packageManager": "pnpm@10.16.0",
   "minimumReleaseAge": 10080,
   "devDependencies": {
+    "myjam-config": "workspace:",
     "tsdown": "^0.15.9"
   }
 }

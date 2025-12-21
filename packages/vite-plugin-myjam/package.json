@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.9.1",
+    "myjam-config": "workspace:",
     "tsdown": "^0.15.9"
   }
 }
