@@ -1,18 +1,38 @@
 {
   "private": true,
+  "name": "myjam",
   "license": "AGPL-3.0-or-later",
   "author": "Chris Wolfe (https://crlfe.ca/)",
   "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./config/eslint": "./eslint.config.ts",
+    "./config/prettier": "./prettier.config.ts",
+    "./config/tsconfig": "./tsconfig.json",
+    "./vite-plugin-myjam": "./vite-plugin-myjam/index.ts"
+  },
   "scripts": {
-    "build": "pnpm -r run build",
-    "lint": "myjam-eslint",
-    "packages:build": "pnpm -r --filter './packages/**' run build",
-    "packages:watch": "pnpm -r --filter './packages/**' --parallel run watch"
+    "build": "vite build docs",
+    "lint": "eslint",
+    "preview": "vite preview docs"
   },
   "packageManager": "pnpm@10.16.0",
   "minimumReleaseAge": 10080,
-  "devDependencies": {
-    "myjam-config": "workspace:",
-    "prettier": "^3.7.4"
+  "dependencies": {
+    "@eslint/css": "^0.14.0",
+    "@eslint/js": "^9.38.0",
+    "@html-eslint/eslint-plugin": "^0.52.0",
+    "@ianvs/prettier-plugin-sort-imports": "^4.6.2",
+    "@tsconfig/strictest": "^2.0.6",
+    "@types/node": "^25.0.3",
+    "binaryen": "^125.0.0",
+    "eslint": "^9.38.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jsdoc": "^61.5.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.7.4",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.2",
+    "vite": "^7.3.0"
   }
 }

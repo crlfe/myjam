@@ -1,9 +1,9 @@
 import { createFilter, transformWithEsbuild, type Plugin } from "vite";
-import { minifyHtml } from "./minify-html";
-import { minifyShader } from "./minify-shader";
-import { reportBundleSize } from "./report-bundle-size";
-import { ShortCssNames } from "./short-css-names";
-import { loadWebAssemblyText } from "./webassembly";
+import { minifyHtml } from "./minify-html.ts";
+import { minifyShader } from "./minify-shader.ts";
+import { reportBundleSize } from "./report-bundle-size.ts";
+import { ShortCssNames } from "./short-css-names.ts";
+import { loadWebAssemblyText } from "./webassembly.ts";
 
 /**
  * Vite plugin to minimize myjam-based apps and report output sizes.
@@ -22,13 +22,6 @@ export default function myjam(): Plugin {
       return {
         build: {
           modulePreload: false,
-          minify: "terser",
-          terserOptions: {
-            compress: {
-              // A second pass inlines CSS module class names.
-              passes: 2,
-            },
-          },
           rollupOptions: {
             output: {
               assetFileNames: "a/[hash].[ext]",

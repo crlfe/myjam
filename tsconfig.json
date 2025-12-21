@@ -1,3 +1,11 @@
 {
-  "extends": "./packages/myjam-config/tsconfig"
+  "extends": "@tsconfig/strictest",
+  "compilerOptions": {
+    "noEmit": true,
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "allowImportingTsExtensions": true
+  },
+  "exclude": ["**/dist", "**/node_modules"]
 }
