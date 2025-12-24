@@ -4,13 +4,16 @@ export type MaybeArray<T> = T | T[];
 /** Either a type or an promise producing that type. */
 export type MaybePromise<T> = T | Promise<T>;
 
-/** Any null-like type: null, undefined, or void. */
-export type Nullish = null | undefined | VoidIgnoreLint;
+/** Either null or undefined. */
+export type Nullish = null | undefined;
 
 /** @ignore */
-// Nullish must include void to handle the output of arbitrary functions. */
+// An explicit void is needed to allow the output of arbitrary functions. */
 // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 type VoidIgnoreLint = void;
+
+/** Any of null, undefined, or void. */
+export type NullishOrVoid = Nullish | VoidIgnoreLint;
 
 /**
  * Clamps a value to the specified range.
@@ -91,4 +94,16 @@ export const debugNotNull = <T>(value: T | Nullish): T => {
     throw new TypeError(`${value} is nullish`);
   }
   return value as T;
+};
+
+/**
+ * Suppress Typescript strict checking of the difference between a function
+ * returning void and returning undefined.
+ * @param value the value
+ * @returns the same value omitting the void type
+ */
+export const voidAsUndefined = <T>(
+  value: T | undefined | VoidIgnoreLint,
+): T | undefined => {
+  return value as T | undefined;
 };

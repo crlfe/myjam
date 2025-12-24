@@ -1,4 +1,12 @@
-import { asArray, isFunction, isNullish, MaybeArray, Nullish } from "./util";
+import {
+  asArray,
+  isFunction,
+  isNullish,
+  MaybeArray,
+  Nullish,
+  NullishOrVoid,
+  voidAsUndefined,
+} from "./util.ts";
 
 type Attrs = Record<string, string | Nullish>;
 
@@ -10,7 +18,7 @@ type Children<T extends Element> = (
 
 type Hook<T extends Element> = (
   target: T,
-) => MaybeArray<string | Node> | Nullish;
+) => MaybeArray<string | Node> | NullishOrVoid;
 
 /**
  * Sets attributes and children on the specified element.
@@ -34,7 +42,7 @@ const prepareElement = <T extends Element>(
   if (children) {
     for (let child of children) {
       if (isFunction(child)) {
-        child = child(element);
+        child = voidAsUndefined(child(element));
       }
       element.append(...asArray(child));
     }
