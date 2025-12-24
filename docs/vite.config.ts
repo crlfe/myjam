@@ -1,4 +1,4 @@
-import { opendir, readdir, readFile } from "node:fs/promises";
+import { access, opendir, readdir, readFile } from "node:fs/promises";
 import NodePath from "node:path";
 import myjam from "myjam/vite-plugin-myjam";
 import { build, defineConfig, type Plugin } from "vite";
@@ -31,25 +31,32 @@ function copyExamples(): Plugin {
       );
 
       for await (const exampleDir of exampleDirs) {
-        await build({ root: exampleDir });
+        if (
+          await access(NodePath.join(exampleDir, "vite.config.ts")).then(
+            () => true,
+            () => false,
+          )
+        ) {
+          await build({ root: exampleDir });
 
-        const exampleDistDir = NodePath.join(exampleDir, "dist");
-        const exampleDistEntries = await opendir(exampleDistDir, {
-          recursive: true,
-        });
-        for await (const file of exampleDistEntries) {
-          if (file.isFile()) {
-            const abs = NodePath.resolve(file.parentPath, file.name);
-            const rel = NodePath.relative(exampleDistDir, abs);
-            this.emitFile({
-              type: "asset",
-              fileName: NodePath.join(
-                "examples",
-                NodePath.basename(exampleDir),
-                rel,
-              ),
-              source: await readFile(abs),
-            });
+          const exampleDistDir = NodePath.join(exampleDir, "dist");
+          const exampleDistEntries = await opendir(exampleDistDir, {
+            recursive: true,
+          });
+          for await (const file of exampleDistEntries) {
+            if (file.isFile()) {
+              const abs = NodePath.resolve(file.parentPath, file.name);
+              const rel = NodePath.relative(exampleDistDir, abs);
+              this.emitFile({
+                type: "asset",
+                fileName: NodePath.join(
+                  "examples",
+                  NodePath.basename(exampleDir),
+                  rel,
+                ),
+                source: await readFile(abs),
+              });
+            }
           }
         }
       }
