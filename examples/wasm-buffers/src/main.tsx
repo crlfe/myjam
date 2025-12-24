@@ -1,15 +1,11 @@
-import { debugNotNull, h } from "myjam";
+import { debugNotNull } from "myjam";
 import summer from "./summer.wat";
 
-const status = h("div", {}, ["Loading..."]);
+const status = <div>Loading...</div>;
 document.body.append(
-  h(
-    "a",
-    {
-      href: "https://github.com/crlfe/myjam/blob/main/examples/wasm-buffers/src/main.ts",
-    },
-    ["View Source"],
-  ),
+  <a href="https://github.com/crlfe/myjam/blob/main/examples/wasm-buffers/src/main.ts">
+    View Source
+  </a>,
   status,
 );
 

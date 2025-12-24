@@ -8,15 +8,15 @@ import {
   voidAsUndefined,
 } from "./util.ts";
 
-type Attrs = Record<string, string | Nullish>;
+export type Attrs = Record<string, string | Nullish>;
 
-type Children<T extends Element> = (
+export type Children<T extends Element> = (
   | MaybeArray<string | Node>
   | Nullish
   | Hook<T>
 )[];
 
-type Hook<T extends Element> = (
+export type Hook<T extends Element> = (
   target: T,
 ) => MaybeArray<string | Node> | NullishOrVoid;
 
@@ -27,7 +27,7 @@ type Hook<T extends Element> = (
  * @param children the children
  * @returns the element
  */
-const prepareElement = <T extends Element>(
+export const prepareElement = <T extends Element>(
   element: T,
   attrs?: Attrs,
   children?: Children<T>,
@@ -65,13 +65,16 @@ export const h: {
     Children?: Children<HTMLElementTagNameMap[Name]>,
   ): HTMLElementTagNameMap[Name];
 
-  (name: string, attrs?: Attrs, children?: Children<HTMLElement>): HTMLElement;
+  <T extends HTMLElement>(
+    name: string,
+    attrs?: Attrs,
+    children?: Children<T>,
+  ): T;
 } = <T extends HTMLElement>(
   name: string,
   attrs?: Attrs,
   children?: Children<T>,
-): T =>
-  prepareElement(document.createElement(name) as unknown as T, attrs, children);
+): T => prepareElement(document.createElement(name) as T, attrs, children);
 
 /**
  * Creates an SVG element with the specified tag name, and sets its initial
@@ -94,4 +97,8 @@ export const s: {
   attrs?: Attrs,
   children?: Children<T>,
 ): T =>
-  prepareElement(document.createElement(name) as unknown as T, attrs, children);
+  prepareElement(
+    document.createElementNS("http://www.w3.org/2000/svg", name) as T,
+    attrs,
+    children,
+  );

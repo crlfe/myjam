@@ -1,4 +1,4 @@
-import { debugNotNull, h } from "myjam";
+import { debugNotNull } from "myjam";
 import css from "./main.module.css";
 
 const searchParams = new URLSearchParams(document.location.search);
@@ -16,12 +16,12 @@ const params = {
   h: parseInt(searchParams.get("h") || "64", 10),
 } as const;
 
-const particles = Array.from({ length: params.p }, () =>
-  h("div", {
-    class: css["particleCircle"],
-    style: `width:${params.w}px;height:${params.h}px`,
-  }),
-);
+const particles = Array.from({ length: params.p }, () => (
+  <div
+    class={css["particleCircle"]}
+    style={`width:${params.w}px;height:${params.h}px`}
+  />
+)) as HTMLDivElement[];
 
 let nextParticleIndex = 0;
 const nextParticle = (): HTMLDivElement => {
@@ -130,41 +130,36 @@ const ACTIONS = {
 } as const;
 
 document.body.append(
-  h("div", { class: css["app"] }, [
-    h("div", { class: css["vert"] }, [
-      h(
-        "a",
-        {
-          href: "https://github.com/crlfe/myjam/blob/main/examples/particles-dom/src/main.ts",
-        },
-        ["View Source"],
-      ),
-      h("p", { style: "max-width:30rem" }, [
-        "This generates random particles using pre-created DIV elements, ",
-        "which translate/scale and change color through the animation. ",
-        "Running thousands of particles this way is a performance problem, but ",
-        "Chrome & FF on my old Linux laptop have no problem with fifty.",
-      ]),
-      h("p", { style: "max-width:30rem" }, [
-        "A WebGL2/WebGPU-based particle system should be much more efficient, but this ",
-        "has the advantage of working without any canvas or custom shader compilation.",
-      ]),
-      Object.entries(ACTIONS).map(([name, callback]) =>
-        h("button", {}, [
-          name,
-          (button) =>
+  <div class={css["app"]}>
+    <div class={css["vert"]}>
+      <a href="https://github.com/crlfe/myjam/blob/main/examples/particles-dom/src/main.tsx">
+        View Source
+      </a>
+      <p style="max-width:30rem">
+        This generates random particles using pre-created DIV elements, which
+        translate/scale and change color through the animation. Running
+        thousands of particles this way is a performance problem, but Chrome
+        &amp; FF on my old Linux laptop have no problem with fifty.
+      </p>
+      <p style="max-width:30rem">
+        A WebGL2/WebGPU-based particle system should be much more efficient, but
+        this has the advantage of working without any canvas or custom shader
+        compilation.
+      </p>
+      {Object.entries(ACTIONS).map(([name, callback]) => (
+        <button>
+          {name}
+          {(button) =>
             button.addEventListener("click", (event) =>
               callback(event.x - params.w / 2, event.y - params.h / 2),
-            ),
-        ]),
-      ),
-    ]),
-    h(
-      "div",
-      {
-        style: "pointer-events:none;position:relative;width:100%;height:100%;",
-      },
-      particles,
-    ),
-  ]),
+            )
+          }
+        </button>
+      ))}
+      ,
+    </div>
+    <div style="pointer-events:none;position:relative;width:100%;height:100%;">
+      {particles}
+    </div>
+  </div>,
 );

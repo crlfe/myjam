@@ -5,6 +5,8 @@
     "target": "esnext",
     "module": "nodenext",
     "moduleResolution": "nodenext",
+    "jsx": "react-jsx",
+    "jsxImportSource": "myjam",
     "allowImportingTsExtensions": true
   },
   "exclude": ["**/dist", "**/node_modules"]

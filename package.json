@@ -9,6 +9,7 @@
     "./config/eslint": "./eslint.config.ts",
     "./config/prettier": "./prettier.config.ts",
     "./config/tsconfig": "./tsconfig.json",
+    "./jsx-runtime": "./src/jsx-runtime.ts",
     "./vite-plugin-myjam": "./vite-plugin-myjam/index.ts"
   },
   "scripts": {
@@ -34,5 +35,8 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.2",
     "vite": "^7.3.0"
+  },
+  "devDependencies": {
+    "solid-js": "^1.9.10"
   }
 }
